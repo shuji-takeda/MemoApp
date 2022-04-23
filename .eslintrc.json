@@ -11,13 +11,14 @@
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 13,
+        "ecmaVersion": "latest",
         "sourceType": "module"
     },
     "plugins": [
         "react"
     ],
     "rules": {
-        "no-use-before-define":0
+        "no-use-before-define":"off",
+        "object-curly-newline":"off"
     }
 }
