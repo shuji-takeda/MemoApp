@@ -1,28 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-
-import Hello from './src/components/Hello';
+import MemoDetailScreen from './src/screens/MemoDetailScreen';
+import MemoCreateScreen from './src/screens/MemoCreateScreen';
+import MemoEditScreen from './src/screens/MemoEditScreen';
+import MemoListScreen from './src/screens/MemoListScreen';
+import LogInScreen from './src/screens/LogInScreen';
+import SignUpScreen from './src/screens/SignUpScreen';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Hello bang>World</Hello>
-      <Hello bang style={{ fontSize: 16 }}>
-        World
-      </Hello>
-      <Text>hogehoge</Text>
-      {/* eslint-disable*/}
-      <StatusBar style='auto' />
-    </View>
-  );
+  return <SignUpScreen />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
