@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,21 +6,57 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import AppBar from '../components/AppBar';
 import Button from '../components/Button';
 
-export default function SignUpScreen() {
+export default function SignUpScreen(props) {
+  const { navigation } = props;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <View style={styles.container}>
-      <AppBar />
       <View style={styles.innder}>
         <Text style={styles.title}>Sign Up</Text>
-        <TextInput defaultValue="Email Address" style={styles.input} />
-        <TextInput defaultValue="Password" style={styles.input} />
-        <Button label="Submit" />
+        <TextInput
+          placeholder="Email Address"
+          style={styles.input}
+          value={email}
+          onChangeText={(text) => {
+            setEmail(text);
+          }}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          textContentType="emailAddress"
+        />
+        <TextInput
+          placeholder="Password"
+          style={styles.input}
+          value={password}
+          onChangeText={(text) => {
+            setPassword(text);
+          }}
+          autoCapitalize="none"
+          secureTextEntry
+          textContentType="password"
+        />
+        <Button
+          label="Submit"
+          onPress={() => {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'MemoList' }],
+            });
+          }}
+        />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Already registered?</Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.reset({
+                index: 0,
+                routes: [{ name: 'LogIn' }],
+              });
+            }}
+          >
             <Text style={styles.footerLink}>Log In!</Text>
           </TouchableOpacity>
         </View>
@@ -49,7 +85,6 @@ const styles = StyleSheet.create({
     height: 48,
     borderColor: '#DDDDDD',
     borderWidth: 1,
-    color: '#DDDDDD',
     backgroundColor: '#FFFFFF',
     paddingHorizontal: 8,
     marginBottom: 16,
