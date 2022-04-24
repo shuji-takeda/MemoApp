@@ -1,17 +1,37 @@
 import React, { useState } from 'react';
+import firebase from 'firebase';
 import {
   View,
   Text,
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Button from '../components/Button';
+import { translateErrors } from '../utils';
 
 export default function SignUpScreen(props) {
   const { navigation } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  function handlePress() {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'MemoList' }],
+        });
+      })
+      .catch((error) => {
+        const errorMsg = translateErrors(error.code);
+        Alert.alert(errorMsg.title, errorMsg.description);
+      });
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.innder}>
@@ -41,10 +61,7 @@ export default function SignUpScreen(props) {
         <Button
           label="Submit"
           onPress={() => {
-            navigation.reset({
-              index: 0,
-              routes: [{ name: 'MemoList' }],
-            });
+            handlePress();
           }}
         />
         <View style={styles.footer}>

@@ -1,4 +1,6 @@
 import React from 'react';
+import firebase from 'firebase';
+import { LogBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MemoDetailScreen from './src/screens/MemoDetailScreen';
@@ -7,8 +9,16 @@ import MemoEditScreen from './src/screens/MemoEditScreen';
 import MemoListScreen from './src/screens/MemoListScreen';
 import LogInScreen from './src/screens/LogInScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
+import { firebaseConfig } from './env';
+
+require('firebase/firestore');
+
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 const Stack = createNativeStackNavigator();
+LogBox.ignoreLogs(['Setting a timer']);
 
 export default function App() {
   return (
